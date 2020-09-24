@@ -108,11 +108,11 @@ function handleResultValidation() {
   if (roundWon === true) {
     if (counter % 2 === 0) {
       counter = 0;
-      alert("player 2 won");
+      alert("Player 2 won!");
       clearTable();
     } else {
       counter = 0;
-      alert("player 1 won");
+      alert("Player 1 won!");
       clearTable();
     }
     return;
