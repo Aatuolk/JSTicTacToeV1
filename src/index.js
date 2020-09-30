@@ -1,6 +1,9 @@
 import "./styles.css";
 
 let counter = 0;
+var elem = document.getElementById("innerBar");
+let width = 0;
+let id;
 
 function createTable() {
   const table = document.getElementById("board");
@@ -18,6 +21,7 @@ function populateCell(tableCell, table) {
   if (counter % 2 === 0) {
     if (tableCell.innerHTML === "") {
       tableCell.innerHTML = "X";
+      tableCell.style.backgroundColor = "rgb(124, 252, 0)";
       counter++;
     } else {
       alert("Pick other cell");
@@ -25,6 +29,7 @@ function populateCell(tableCell, table) {
   } else {
     if (tableCell.innerHTML === "") {
       tableCell.innerHTML = "O";
+      tableCell.style.backgroundColor = "rgb(250, 128, 114)";
       counter++;
     } else {
       alert("Pick other cell");
@@ -37,6 +42,8 @@ function oncclick(table) {
     for (var j = 0; j < table.rows[i].cells.length; j++) {
       table.rows[i].cells[j].onclick = function () {
         populateCell(this, table);
+        clearBarWidth();
+        moveBar();
         if (counter > 8) {
           handleResultValidation();
         }
@@ -117,4 +124,23 @@ function handleResultValidation() {
     }
     return;
   }
+}
+
+function moveBar() {
+  id = setInterval(frame, 100);
+  function frame() {
+    if (width >= 100) {
+      counter++;
+      clearBarWidth();
+    } else {
+      width++;
+      elem.style.width = width + "%";
+    }
+  }
+}
+
+function clearBarWidth() {
+  width = 0;
+  clearInterval(id);
+  elem.style.width = width + "%";
 }
